@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Think And Click Main Menu</title>
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Press+Start+2P:regular);
+
+  body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #3dc8ff; /* Fondo azul cielo */
+    overflow: hidden;
+  }
+  .menu-container {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    top: 140px;
+  }
+  .button {
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid black;  
+    background-color: #FFD700;  
+    cursor: pointer;
+    font-size: 20px; /* Tamaño de la fuente */
+    transition: transform 0.3s ease-in-out, background-color 0.3s; /* Efectos de movimiento y cambio de color */
+  }
+  .button:hover {
+    transform: scale(1.1); /* Escala el botón al pasar el mouse */
+    background-color: #FFA500; /* Cambio de color al pasar el mouse */
+  }
+  #menu-btn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: #32CD32; /* Color verde */
+  }
+  .description-container {
+    background-image: url('./img/cuadro.png');
+    display: none;
+    color: black;
+    background-size: contain; /* Mantiene la proporción de la imagen */
+    background-repeat: no-repeat;
+    background-position: center; /* Centra la imagen */
+    padding: 100px; /* Aumenta el espacio interno */
+    border-radius: 10px;
+    margin-top: -30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    min-height: 200px; /* Aumenta la altura mínima */
+    max-height: 200px; /* Aumenta la altura mínima */
+  }
+  .descripcion-letra {
+    left: 50%;
+    width: 430px;
+    margin-top: 2%;
+    margin-left: 10%;
+  }
+  .logo-container {
+    text-align: center; /* Centra horizontalmente */
+  }
+  .logo-container img {
+    max-width: 100%; /* Ajusta el ancho máximo al tamaño del div */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Elimina el espacio extra debajo de la imagen */
+    margin: 0 auto; /* Centra verticalmente */
+    width: 55%;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0px;
+    top: 10%;
+    width: 400px;
+    height: 500px;
+    overflow: auto;
+  }
+  .modal2 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 90%;
+  }
+  .modal3 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+  .creditoss {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+  }
+  .creditoss img {
+    height: auto;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .modal-content {
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 10% auto; /* Ajusta el margen superior e inferior según tus preferencias */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+  }.modal-content2 {
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 10% auto; /* Ajusta el margen superior e inferior según tus preferencias */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+  }
+  .modal-content button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #ADD8E6; /* Color celeste */
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  .modal-content button:hover {
+    background-color: #87CEFA; /* Color celeste más oscuro al pasar el mouse */
+  }
+  .modal-content input[type="text"], .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #888;
+    font-family: 'Press Start 2P', cursive;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .clouds, .grass {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-repeat: repeat-x;
+  }
+  .clouds {
+    top: 0;
+    background-image: url('./img/nube.png'); /* Imagen de nubes */
+    animation: moveClouds 20s linear infinite;
+  }
+  .grass {
+    bottom: 0;
+    background-image: url('./img/pasto.png'); /* Imagen de pasto */
+    animation: moveGrass 10s linear infinite;
+  }
+  @keyframes moveClouds {
+    from { background-position: 0 0; }
+    to { background-position: -1000px 0; }
+  }
+  @keyframes moveGrass {
+    from { background-position: 0 0; }
+    to { background-position: -500px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="clouds">
+	<button id="menu-btn" class="button">MENU</button>
+  <div id="menu-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <button id="btn-creditos">Créditos</button>
+      <button id="btn-info-adicional">Información Adicional</button>
+    </div>
+  </div>
+  <div class="logo-container">
+    <img src="./img/logo.png">
+  </div>
+</div>
+<div class="menu-container">
+  <button id="btn-numeros" class="button" onclick="location.href='number/number.html'">MEMONUM</button>
+  <button id="btn-imagenes" class="button" onclick="location.href='imagenes/images.html'">MEMORIMG</button>
+  <button id="btn-puzzle" class="button" onclick="location.href='puzzle/index.html'" >PUZZLE</button>
+  <button id="btn-wordle" class="button" onclick="location.href='wordle/index.html'">WORDLE</button>
+  <div id="desc-numeros" class="description-container"> <div class="descripcion-letra">Se te presenta una cuadrícula de tarjetas volteadas, cada una con uno un numero en el reverso. Las tarjetas están en pares, y deberas encontrar el par correcto para ganar.</div></div>
+  <div id="desc-imagenes" class="description-container"> <div class="descripcion-letra">Se te presenta una cuadrícula de tarjetas volteadas, cada una con una imagen en el reverso. Las tarjetas están en pares, y deberas encontrar el par correcto para ganar.</div></div>
+  <div id="desc-puzzle" class="description-container"> <div class="descripcion-letra">Este es un clásico rompecabezas deslizante donde tendrás un cuadro de 3x3 con los números del 1 al 8 y un espacio vacío. El objetivo es deslizar los números usando el espacio vacío hasta que todos los números estén en orden ascendente, desde el 1 en la esquina superior izquierda hasta el 8 en la esquina inferior derecha</div></div>
+  <div id="desc-wordle" class="description-container"> <div class="descripcion-letra">Este juego trata de adivinar una palabra oculta en seis intentos.Verde significa: Letra correcta en la posición correcta. Amarillo: Letra correcta en la posición incorrecta. Gris: Letra incorrecta.</div></div>
+
+
+
+  </div></div>
+</div>
+<div class="grass"></div>
+
+<!-- Modal de Créditos -->
+<div id="credit-modal" class="modal2">
+  <div class="modal-content">
+    <span class="close">×</span>
+    <img src="img/grupo.gif" class="creditoss">
+  </div>
+</div>
+
+<!-- Modal de Información Adicional -->
+<div id="info-modal" class="modal3">
+  <div class="modal-content2" >
+    <span class="close" id="close-info-modal">×</span>
+    <h4>Memorizar (Imágenes y Números):</h4>
+    <label>Niños y adolescentes: Desarrolla la memoria visual y la concentración.</label><br>
+    <label>Adultos y personas mayores: Mejora la capacidad de recordar detalles visuales, útil para el día a día.</label>
+    <h4>Rompecabezas de Números</h4>
+    <label for="">Aficionados a los rompecabezas: Desarrolla habilidades de lógica y resolución de problemas.
+    </label><br>
+    <label for="">Personas de todas las edades: Ofrece un desafío mental entretenido que fomenta el pensamiento estratégico</label>
+    <h4>Wordle Típico</h4>
+    <label for="">Aprendices de idiomas: Ampliará el vocabulario y mejorará las habilidades lingüísticas.
+    </label><br>
+    <label for="">Aficionados a los juegos de palabras: Proporciona un desafío diario y mejora las habilidades de deducción y ortografía.</label>
+
+    <h4>En resumen, Think and Click ofrece una variedad de desafíos mentales que pueden beneficiar a 
+      una amplia gama de personas, desde estudiantes hasta adultos mayores, mejorando la memoria, la lógica, la resolución de problemas 
+      y las habilidades lingüísticas de una manera entretenida y atractiva.</h4>
+
+  </div>
+</div>
+
+<script>
+  var menuModal = document.getElementById("menu-modal");
+  var menuBtn = document.getElementById("menu-btn");
+  var menuClose = document.getElementsByClassName("close")[0];
+  var creditModal = document.getElementById("credit-modal");
+  var creditBtn = document.getElementById("btn-creditos");
+  var creditClose = document.getElementsByClassName("close")[1];
+  var infoModal = document.getElementById("info-modal");
+  var infoBtn = document.getElementById("btn-info-adicional");
+  var infoClose = document.getElementById("close-info-modal");
+
+  menuBtn.onclick = function() {
+    menuModal.style.display = "block";
+  }
+  menuClose.onclick = function() {
+    menuModal.style.display = "none";
+  }
+  creditBtn.onclick = function() {
+    menuModal.style.display = "none";
+    creditModal.style.display = "block";
+  }
+  creditClose.onclick = function() {
+    creditModal.style.display = "none";
+  }
+  infoBtn.onclick = function() {
+    menuModal.style.display = "none";
+    infoModal.style.display = "block";
+  }
+  infoClose.onclick = function() {
+    infoModal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == menuModal) {
+      menuModal.style.display = "none";
+    } else if (event.target == creditModal) {
+      creditModal.style.display = "none";
+    } else if (event.target == infoModal) {
+      infoModal.style.display = "none";
+    }
+  }
+  
+  // Función para mostrar la descripción
+  function showDescription(buttonId, descriptionId) {
+    var button = document.getElementById(buttonId);
+    var description = document.getElementById(descriptionId);
+    button.onmouseover = function() {
+      description.style.display = "block";
+    }
+    button.onmouseout = function() {
+      description.style.display = "none";
+    }
+  }
+
+  showDescription("btn-numeros", "desc-numeros");
+  showDescription("btn-imagenes", "desc-imagenes");
+  showDescription("btn-puzzle", "desc-puzzle");
+  showDescription("btn-wordle", "desc-wordle");
+</script>
+</body>
+</html>
